@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from database.calendar import get_calendar
+
 app = FastAPI()
 
 
@@ -23,12 +25,10 @@ async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
 
-@app.get('/without_key')
+@app.get('/get_calendar')
 async def check():
-    res = {
-        'id': 0,
-        'name': 'string',
-        'isLogin': False
+    array = get_calendar()
+    events = {
+        'events': array
     }
-    array = [res]
-    return array
+    return events
