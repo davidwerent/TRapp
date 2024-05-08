@@ -21,3 +21,14 @@ async def root():
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
+
+
+@app.get('/without_key')
+async def check():
+    res = {
+        'id': 0,
+        'name': 'string',
+        'isLogin': False
+    }
+    array = [res]
+    return array
