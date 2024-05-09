@@ -31,7 +31,12 @@ def get_calendar():
         id = event[0]
         title = event[1]
         duration = event[2]
-        start = event[3]
+        try:
+            timestamp = int(event[3])
+            start = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M:%S')
+        except ValueError:
+            start = event[3]
+
         created_at = event[4]
         updated_at = event[5]
 
