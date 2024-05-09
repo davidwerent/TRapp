@@ -39,7 +39,7 @@ def get_calendar():
             'id': id,
             'title': title,
             'duration': duration,
-            'start': start,
+            'start_date': start,
             'created_at': created_at,
             'updated_at': updated_at
         }
