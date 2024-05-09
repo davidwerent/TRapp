@@ -39,10 +39,12 @@ def get_calendar():
 
         created_at = event[4]
         updated_at = event[5]
+        subtitle = event[6]
 
         res = {
             'id': id,
             'title': title,
+            'subtitle': subtitle,
             'duration': duration,
             'start_date': start,
             'created_at': created_at,
