@@ -22,37 +22,65 @@ def print_database():
     print(cursor.fetchall())
 
 
-def get_calendar():
+def get_calendar(show_free_slot=True):
     cursor.execute('SELECT * FROM calendar')
     events = cursor.fetchall()
     [print(event) for event in events]
     records = []
-    for event in events:
-        id = event[0]
-        title = event[1]
-        duration = event[2]
-        try:
-            timestamp = int(event[3])
-            start = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M:%S')
-        except ValueError:
-            start = event[3]
-
-        created_at = event[4]
-        updated_at = event[5]
-        subtitle = event[7]
-
-        res = {
-            'id': id,
-            'title': title,
-            'subtitle': subtitle,
-            'duration': duration,
-            'start_date': start,
-            'created_at': created_at,
-            'updated_at': updated_at
-        }
-        records.append(res)
+    if show_free_slot:
+        for event in events:
+            is_free = bool(event[8])
+            if not is_free:
+                break
+            id = event[0]
+            title = 'СВОБОДНО'
+            duration = event[2]
+            try:
+                timestamp = int(event[3])
+                start = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                start = event[3]
+            created_at = event[4]
+            updated_at = event[5]
+            subtitle = '5000 руб'
+            res = {
+                'id': id,
+                'title': title,
+                'subtitle': subtitle,
+                'duration': duration,
+                'start_date': start,
+                'created_at': created_at,
+                'updated_at': updated_at
+            }
+            records.append(res)
+    else:
+        for event in events:
+            is_free = bool(event[8])
+            if is_free:
+                continue
+            id = event[0]
+            title = event[1]
+            duration = event[2]
+            try:
+                timestamp = int(event[3])
+                start = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                start = event[3]
+            created_at = event[4]
+            updated_at = event[5]
+            subtitle = event[7]
+            res = {
+                'id': id,
+                'title': title,
+                'subtitle': subtitle,
+                'duration': duration,
+                'start_date': start,
+                'created_at': created_at,
+                'updated_at': updated_at
+            }
+            records.append(res)
     print(records)
     return records
 
 
-get_calendar()
+get_calendar(show_free_slot=False)

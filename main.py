@@ -25,9 +25,9 @@ async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
 
-@app.get('/get_calendar')
+@app.get('/get_free_slot')
 async def check():
-    array = get_calendar()
+    array = get_calendar(show_free_slot=True)
     events = {
         'events': array
     }
