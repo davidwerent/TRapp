@@ -40,8 +40,8 @@ def get_free_slot_func():
         subtitle = event[7]
         res = {
             'id': id,
-            'title': title,
-            'subtitle': subtitle,
+            'title': 'СВОБОДНО',
+            'subtitle': '5000 руб',
             'duration': duration,
             'start_date': replace_chars(start),
             'created_at': replace_chars(created_at),
