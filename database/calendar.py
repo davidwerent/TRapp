@@ -37,11 +37,15 @@ def get_calendar(show_free_slot=True):
             duration = event[2]
             try:
                 timestamp = int(event[3])
-                start = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M:%S')
+                start = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%dT%H:%M:%Sz')
+                timestamp = int(event[4])
+                created_at = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%dT%H:%M:%SZ')
+                timestamp = int(event[5])
+                updated_at = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%dT%H:%M:%SZ')
             except ValueError:
                 start = event[3]
-            created_at = event[4]
-            updated_at = event[5]
+                created_at = event[4]
+                updated_at = event[5]
             subtitle = '5000 руб'
             res = {
                 'id': id,
@@ -63,11 +67,16 @@ def get_calendar(show_free_slot=True):
             duration = event[2]
             try:
                 timestamp = int(event[3])
-                start = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M:%S')
+                start = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%dT%H:%M:%SZ')
+                timestamp = int(event[4])
+                created_at = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%dT%H:%M:%SZ')
+                timestamp = int(event[5])
+                updated_at = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%dT%H:%M:%SZ')
             except ValueError:
                 start = event[3]
-            created_at = event[4]
-            updated_at = event[5]
+                created_at = event[4]
+                updated_at = event[5]
+
             subtitle = event[7]
             res = {
                 'id': id,
