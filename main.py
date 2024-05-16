@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from database.calendar import get_calendar
+from database.calendar import get_free_slot_func
 
 app = FastAPI()
 
@@ -27,7 +27,7 @@ async def say_hello(name: str):
 
 @app.get('/get_free_slot')
 async def check():
-    array = get_calendar(show_free_slot=True)
+    array = get_free_slot_func()
     events = {
         'events': array
     }
