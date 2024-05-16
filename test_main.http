@@ -9,3 +9,6 @@ GET http://127.0.0.1:8000/get_free_slot
 Accept: application/json
 
 ###
+
+POST http://127.0.0.1:8000/change_slot_busy/3
+Accept: application/json

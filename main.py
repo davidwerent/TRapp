@@ -32,3 +32,7 @@ async def check():
         'events': array
     }
     return events
+
+@app.post('/change_slot_busy/{event_id}')
+async def change_slot_busy_router(event_id: int):
+    return f'all is OK={event_id}'
