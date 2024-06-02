@@ -1,0 +1,31 @@
+# Test your FastAPI endpoints
+
+POST http://127.0.0.1:8000/auth/signin
+Content-Type: application/json
+
+{
+  "method": "sign_in",
+  "token": "token_string",
+  "data": {
+    "phone": "79339990895",
+    "password": "qwert",
+    "device_id": "string"
+  }
+}
+
+###
+### юзер уже существует
+POST http://127.0.0.1:8000/auth/signup
+Content-Type: application/json
+
+{
+  "method": "sign_up",
+  "token": "token_string",
+  "data": {
+    "phone": "793399908952",
+    "password": "qwert",
+    "firstname": "Test 1",
+    "lastname": "Lastovich",
+    "device_id": "string"
+  }
+}

@@ -27,16 +27,3 @@ Content-Type: application/json
 }
 
 ###
-
-POST http://127.0.0.1:8000/auth/login
-Content-Type: application/json
-
-{
-  "method": "sign_in",
-  "token": "token_string",
-  "data": {
-    "phone": "79339990895",
-    "password": "qwert",
-    "device_id": "string"
-  }
-}
