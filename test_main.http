@@ -5,10 +5,38 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/get_free_slot
+GET http://127.0.0.1:8000/calendar/get_free_slot
 Accept: application/json
 
 ###
 
-POST http://127.0.0.1:8000/change_slot_busy/3
-Accept: application/json
+
+POST http://127.0.0.1:8000/calendar/event/{{event_id}}/set_busy
+Content-Type: application/json
+
+{
+  "status": 0
+}
+
+###
+GET http://127.0.0.1:8000/calendar/get_all_slot
+Content-Type: application/json
+
+{
+  "date": "2024-05-16"
+}
+
+###
+
+POST http://127.0.0.1:8000/auth/login
+Content-Type: application/json
+
+{
+  "method": "sign_in",
+  "token": "token_string",
+  "data": {
+    "phone": "79339990895",
+    "password": "qwert",
+    "device_id": "string"
+  }
+}

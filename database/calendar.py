@@ -22,6 +22,12 @@ def print_database():
     print(cursor.fetchall())
 
 
+def get_all_slot_by_date(date):
+    cursor.execute('SELECT * FROM calendar WHERE start_date = DATE(?)', (date,))
+    result = cursor.fetchall()
+    [print(result) for res in result]
+
+
 def get_free_slot_func():
     cursor.execute('SELECT * FROM calendar WHERE is_free IS TRUE')
     events = cursor.fetchall()
@@ -36,7 +42,6 @@ def get_free_slot_func():
         start = event[3]
         created_at = event[4]
         updated_at = event[5]
-
         subtitle = event[7]
         res = {
             'id': id,
@@ -52,4 +57,6 @@ def get_free_slot_func():
     return records
 
 
-get_free_slot_func()
+def set_slot_status(event_id, status):
+    cursor.execute('UPDATE calendar SET is_free = ? WHERE id = ?', (status, event_id))
+    conn.commit()
