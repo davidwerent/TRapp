@@ -47,7 +47,7 @@ def check_auth_data(phone, password):
         }
         return response
 
-
+#1 123382
 def create_new_user(user_data):
     cursor.execute('SELECT phone FROM users WHERE phone =?', (user_data.phone,))
     user = cursor.fetchone()
