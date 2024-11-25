@@ -22,10 +22,11 @@ Content-Type: application/json
   "method": "sign_up",
   "token": "token_string",
   "data": {
-    "phone": "793399908952",
+    "phone": "793399908953",
     "password": "qwert",
     "firstname": "Test 1",
     "lastname": "Lastovich",
-    "device_id": "string"
+    "device_id": "string",
+    "flat": 658
   }
 }

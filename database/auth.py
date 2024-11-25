@@ -35,7 +35,8 @@ def check_auth_data(phone, password):
                 'id': user[0],
                 'phone': user[1],
                 'firstname': user[3],
-                'lastname': user[4]
+                'lastname': user[4],
+                'flat': user[5]
             }
         }
         return response
@@ -59,8 +60,9 @@ def create_new_user(user_data):
         }
         return response
 
-    cursor.execute('INSERT INTO users(phone, password, firstname, lastname, device_id) VALUES (?,?,?,?,?)',
-                   (user_data.phone, user_data.password, user_data.firstname, user_data.lastname, user_data.device_id))
+    # 12
+    cursor.execute('INSERT INTO users(phone, password, firstname, lastname, device_id, flat) VALUES (?,?,?,?,?,?)',
+                   (user_data.phone, user_data.password, user_data.firstname, user_data.lastname, user_data.device_id, user_data.flat))
     conn.commit()
     last_id = cursor.lastrowid
     response = {

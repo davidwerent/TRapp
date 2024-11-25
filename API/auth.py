@@ -32,6 +32,7 @@ class RegRequest(BaseModel):
     firstname: str = None
     lastname: str = None
     device_id: str = None
+    flat: int = None
 
 
 class BaseRegRequest(BaseModel):
