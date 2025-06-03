@@ -1,8 +1,11 @@
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Request, Response, Form
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
 from database.auth import check_auth_data, create_new_user
 
+templates = Jinja2Templates(directory='templates')
 
 class AuthRequest(BaseModel):
     phone: str = None
@@ -45,12 +48,33 @@ router = APIRouter()
 
 
 @router.post('/auth/signin')
-async def check(request: BaseAuthRequest):
-    response = check_auth_data(request.data.phone, request.data.password)
-    return response
+async def check(request: Request,
+                phone_number: str = Form(...),
+                password: str = Form(...)):
+    print(phone_number)
+    print(password)
+
+    response = check_auth_data(phone_number, password)
+    if response.get('status') == 200:
+        target_url = '/lk'
+        return RedirectResponse(target_url, status_code=303)
+    else:
+        return response
+
+@router.get('/auth/signin')
+async def show_signin(request: Request):
+    print(request)
+    return templates.TemplateResponse('login.html', {'request': request})
 
 
 @router.post('/auth/signup')
-async def signup(request: BaseRegRequest):
+async def signup(request: Request,
+                 first_name: str = Form(...),
+                 phone_number: str = Form(...),
+                 password: str = Form(...)):
 
-    return create_new_user(request.data)
+    result = create_new_user(first_name, phone_number, password)
+    if result.get('status') == 2001:
+        return RedirectResponse('/lk', status_code=303)
+    else:
+        return result

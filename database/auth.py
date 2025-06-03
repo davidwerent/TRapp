@@ -36,7 +36,9 @@ def check_auth_data(phone, password):
                 'phone': user[1],
                 'firstname': user[3],
                 'lastname': user[4],
-                'flat': user[5]
+                'middlename': user[6],
+                'flat': user[5],
+                'snils': user[7]
             }
         }
         return response
@@ -49,8 +51,8 @@ def check_auth_data(phone, password):
         return response
 
 #1 123382
-def create_new_user(user_data):
-    cursor.execute('SELECT phone FROM users WHERE phone =?', (user_data.phone,))
+def create_new_user(first_name, phone_number, password):
+    cursor.execute('SELECT phone FROM users WHERE phone =?', (phone_number,))
     user = cursor.fetchone()
     if user is not None:
         response = {
@@ -61,12 +63,12 @@ def create_new_user(user_data):
         return response
 
     # 12
-    cursor.execute('INSERT INTO users(phone, password, firstname, lastname, device_id, flat) VALUES (?,?,?,?,?,?)',
-                   (user_data.phone, user_data.password, user_data.firstname, user_data.lastname, user_data.device_id, user_data.flat))
+    cursor.execute('INSERT INTO users(phone, password, firstname, lastname, device_id, flat, middlename, snils) VALUES (?,?,?,?,?,?,?,?)',
+                   (phone_number, password, first_name, '', '', '', '', ''))
     conn.commit()
     last_id = cursor.lastrowid
     response = {
-        'status': 200,
+        'status': 2001,
         'message': f'new user with ID={last_id} had been created!',
         'user':{
             'id': last_id
